@@ -44,6 +44,7 @@ Transactions API is the microservice for recording current account transactions.
 * **Create accounts**.
 * **List accounts**.
 * **List account transactions by ID**.
+* **Get account balance**.
 
 ## Transaction
 

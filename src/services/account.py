@@ -39,3 +39,15 @@ class AccountService:
             query, values={"account_id": account_id}
         )
         return query_result
+
+    async def read_balance(self, account_id: int) -> float | None:
+        query = """
+            SELECT 
+                CASE WHEN balance THEN balance/100.0 ELSE balance END as balance
+            FROM accounts
+            WHERE accounts.id = :account_id
+        """
+        query_result = await database.fetch_one(
+            query, values={"account_id": account_id}
+        )
+        return query_result["balance"] if query_result else None

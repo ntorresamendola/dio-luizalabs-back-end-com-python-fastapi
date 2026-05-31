@@ -1,3 +1,4 @@
+from alembic.environment import Optional
 from databases.interfaces import Record
 
 from src.database import database
@@ -9,14 +10,30 @@ from src.schemas.transaction import TransactionIn
 
 class TransactionService:
     async def read_all(
-        self, account_id: int, limit: int, skip: int = 0
+        self, account_id: int, limit: int, skip: int = 0, tipo: str = "all"
     ) -> list[Record]:
-        query = (
-            transactions.select()
-            .where(transactions.c.account_id == account_id)
-            .limit(limit)
-            .offset(skip)
-        )
+        if tipo not in ("all", TransactionType.DEPOSIT, TransactionType.WITHDRAWAL):
+            raise ValueError(
+                "Invalid transaction type. Must be 'all', 'deposit' or 'withdrawal'."
+            )
+
+        query = accounts.select().where(accounts.c.id == account_id)
+        account = await database.fetch_one(query)
+        if not account:
+            raise AccountNotFoundError
+
+        if tipo != "all":
+            query = transactions.select().where(
+                (transactions.c.account_id == account_id)
+                & (transactions.c.type == tipo)
+            )
+        else:
+            query = (
+                transactions.select()
+                .where(transactions.c.account_id == account_id)
+                .limit(limit)
+                .offset(skip)
+            )
         return await database.fetch_all(query)
 
     @database.transaction()

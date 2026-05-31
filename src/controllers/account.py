@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-
+from alembic.environment import Optional
 from src.schemas.account import AccountIn
 from src.security import login_required
 from src.services.account import AccountService
@@ -22,6 +22,13 @@ async def create_account(account: AccountIn):
     return await account_service.create(account)
 
 
-@router.get("/{id}/transactions", response_model=list[TransactionOut])
-async def read_account_transactions(id: int, limit: int = 100, skip: int = 0):
-    return await tx_service.read_all(account_id=id, limit=limit, skip=skip)
+@router.get("/{id}/transactions/", response_model=list[TransactionOut])
+async def read_account_transactions(
+    id: int, tipo: str = "all", limit: int = 100, skip: int = 0
+):
+    return await tx_service.read_all(account_id=id, tipo=tipo, limit=limit, skip=skip)
+
+
+@router.get("/{id}/balance", response_model=float)
+async def read_account_balance(id: int):
+    return await account_service.read_balance(account_id=id)

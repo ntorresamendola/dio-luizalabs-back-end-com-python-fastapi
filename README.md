@@ -28,7 +28,7 @@ Foram atendidos os seguintes requisitos técnicos:
 
 O projeto e suas dependências foram criados usando o Poetry, mais adequado para gerenciar projetos comerciais. Requer python 3.12+.
 
-Os pacotes requeridos para o funcionamento deste projeto estão no arquivo requeriments.txt ou podem ser obtidos pelo comando(recomendado):
+Os pacotes requeridos para o funcionamento deste projetos estão no arquivo requeriments.txt ou podem ser obtidos pelo comando(recomendado):
 
 ````powershell
 poetry show
@@ -273,21 +273,38 @@ Usando o endpoint público login
 # Melhorias possíveis:
 
 * Criar uma tabela só para usuários.
+
 * Adicionar mais informações de usuário além do id.
 
 * Contas só podem ser criadas para usuários que já possuem id (do jeito que está o usuário passado como parâmetro é criado se não existe).
+
 * Filtrar contas por id de usuário.
 
 * Criar uma tabela com usuários e senhas criptografadas. O login irá verificar o usuário e a senha.
+
 * Criar uma tabela de log que registra quando e quem fez login ou realizou alguma operação.
+
 * Garantir que o usuário logado só possa criar contas em seu nome.
+
 * Garantir que o usuário logado só possa efetuar saques em seu nome.
+
 * Porém permitir que efetue depósito em qualquer conta.
+
 * Filtrar o extrato por tipo de operação (saque, depósito).
+
 * Cobrar uma taxa a partir do terceiro saque da conta. O saldo deve cobrir tanto o valor do saque da conta quanto a taxa.
+
 * Permitir transferência entre contas (o usuário logado poderá transferir diretamente seu saldo para uma outra conta que exista).
+
 * Permitir que uma conta seja fechada. Contas fechadas não efetuam depósitos nem saques. 
+
 * ~~Obrigar que os depósitos e saques sejam necessariamente valores monetários válidos, com até duas casas decimais. Como está a API arredonda valores com mais de duas casas decimais.~~
+
+* ~~Adicionar endpoint para verificar o saldo de uma conta específica.~~
+
+* ~~Retorna erro se tentar acessar transações de um usuário que não existe.~~
+
+  
 
 
 
@@ -321,4 +338,6 @@ def upgrade():
 
 * A API passará a enviar e receber dados como decimal, mas armazenar como centavos.
 
-  
+## V2
+
+Permite filtrar por tipo de transação(por padrão são todas) e gera erro se tentar obter as transações de um usuário que não existe.
