@@ -287,5 +287,38 @@ Usando o endpoint público login
 * Cobrar uma taxa a partir do terceiro saque da conta. O saldo deve cobrir tanto o valor do saque da conta quanto a taxa.
 * Permitir transferência entre contas (o usuário logado poderá transferir diretamente seu saldo para uma outra conta que exista).
 * Permitir que uma conta seja fechada. Contas fechadas não efetuam depósitos nem saques. 
-* Obrigar que os depósitos e saques sejam necessariamente valores monetários válidos, com até duas casas decimais. Como está a API arredonda valores com mais de duas casas decimais.
+* ~~Obrigar que os depósitos e saques sejam necessariamente valores monetários válidos, com até duas casas decimais. Como está a API arredonda valores com mais de duas casas decimais.~~
 
+
+
+# Modificações
+
+## V1
+
+* O parâmetro limit das queries passou a ser opcional e valer 100 por padrão.
+* Implementada a restrição que o saque deve ser valor monetário válido (erro 400 se não).
+* Foram alteradas as tabelas para armazenar o saldo da conta em centavos em vez de decimal. Como o SQLite não suporta alter_table foi necessário modificar o arquivo gerado pelo alembic:
+
+````sqlite
+def upgrade():
+    with op.batch_alter_table("accounts") as batch_op:
+        batch_op.alter_column(
+            "balance",
+            type_=sa.Integer(),
+            existing_type=sa.NUMERIC(precision=10, scale=2),
+            existing_nullable=False,
+        )
+    with op.batch_alter_table("transactions") as batch_op:
+        batch_op.alter_column(
+            "amount",
+            type_=sa.Integer(),
+            existing_type=sa.NUMERIC(precision=10, scale=2),
+            existing_nullable=False,
+        )
+````
+
+
+
+* A API passará a enviar e receber dados como decimal, mas armazenar como centavos.
+
+  

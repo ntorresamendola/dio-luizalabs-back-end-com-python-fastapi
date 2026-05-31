@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from pydantic import AwareDatetime, BaseModel, NaiveDatetime, PositiveFloat
 
 

@@ -21,17 +21,22 @@ class TransactionService:
 
     @database.transaction()
     async def create(self, transaction: TransactionIn) -> Record | None:
+        if len(str(transaction.amount).split(".")[1]) > 2:
+            raise ValueError(
+                "Balance must be a valid currency amount with two decimal places."
+            )
+
         query = accounts.select().where(accounts.c.id == transaction.account_id)
         account = await database.fetch_one(query)
         if not account:
             raise AccountNotFoundError
 
         if transaction.type == TransactionType.WITHDRAWAL:
-            balance = float(account.balance) - transaction.amount  # type: ignore
+            balance = account.balance - 100 * transaction.amount  # type: ignore
             if balance < 0:
                 raise BusinessError("Operation not carried out due to lack of balance")
         else:
-            balance = float(account.balance) + transaction.amount  # type: ignore
+            balance = account.balance + 100 * transaction.amount  # type: ignore
 
         # Create transaction entry
         transaction_id = await self.__register_transaction(transaction)
