@@ -28,6 +28,16 @@ Foram atendidos os seguintes requisitos técnicos:
 
 O projeto e suas dependências foram criados usando o Poetry, mais adequado para gerenciar projetos comerciais. Requer python 3.12+.
 
+Os pacotes requeridos para o funcionamento deste projetos estão no arquivo requeriments.txt ou podem ser obtidos pelo comando(recomendado):
+
+````powershell
+poetry show
+````
+
+Que lê os requerimentos do arquivo poetry.lock
+
+
+
 # Estrutura deste repositório
 
 ```
@@ -278,5 +288,4 @@ Usando o endpoint público login
 * Permitir transferência entre contas (o usuário logado poderá transferir diretamente seu saldo para uma outra conta que exista).
 * Permitir que uma conta seja fechada. Contas fechadas não efetuam depósitos nem saques. 
 * Obrigar que os depósitos e saques sejam necessariamente valores monetários válidos, com até duas casas decimais. Como está a API arredonda valores com mais de duas casas decimais.
-
 
