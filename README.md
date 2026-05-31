@@ -1,7 +1,5 @@
 # Apresentação
 
-
-
 ## Desafio: API Bancária Assíncrona com FastAPI
 
 Neste desafio, foi projetada e implementada uma API RESTful assíncrona para gerenciar operações bancárias de depósitos e saques, vinculadas a contas correntes. Este desafio proporcionou a experiência de construir uma aplicação backend moderna e eficiente utilizando autenticação JWT e práticas recomendadas de design de APIs.
@@ -29,6 +27,52 @@ Foram atendidos os seguintes requisitos técnicos:
 # Requerimentos
 
 O projeto e suas dependências foram criados usando o Poetry, mais adequado para gerenciar projetos comerciais. Requer python 3.12+.
+
+# Estrutura deste repositório
+
+```
+API-BANCARIA-ASSINCRONA
+├─ alembic
+│  ├─ env.py
+│  ├─ README
+│  ├─ script.py.mako
+│  └─ versions
+│     └─ 91573322fa10_add_initial_tables.py
+├─ alembic.ini
+├─ bank.db
+├─ images
+│  ├─ 1-API.png
+│  ├─ 2-login.png
+│  └─ 3-create_account.png
+├─ poetry.lock
+├─ pyproject.toml
+├─ README.md
+└─ src
+   ├─ config.py
+   ├─ controllers
+   │  ├─ account.py
+   │  ├─ auth.py
+   │  └─ transaction.py
+   ├─ database.py
+   ├─ exceptions.py
+   ├─ main.py
+   ├─ models
+   │  ├─ account.py
+   │  └─ transaction.py
+   ├─ schemas
+   │  ├─ account.py
+   │  ├─ auth.py
+   │  └─ transaction.py
+   ├─ security.py
+   ├─ services
+   │  ├─ account.py
+   │  └─ transaction.py
+   └─ views
+      ├─ account.py
+      ├─ auth.py
+      └─ transaction.py
+
+```
 
 # Instruções
 
@@ -234,4 +278,5 @@ Usando o endpoint público login
 * Permitir transferência entre contas (o usuário logado poderá transferir diretamente seu saldo para uma outra conta que exista).
 * Permitir que uma conta seja fechada. Contas fechadas não efetuam depósitos nem saques. 
 * Obrigar que os depósitos e saques sejam necessariamente valores monetários válidos, com até duas casas decimais. Como está a API arredonda valores com mais de duas casas decimais.
+
 
