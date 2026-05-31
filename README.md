@@ -246,19 +246,19 @@ uvicorn src.main:app --reload
 
 
 
-![image-20260530220214460](C:\Users\natan\Desktop\dio\backend com python\4-fast-api\apis-assincronas\API-BANCARIA-ASSINCRONA\images\1-API.png)
+![Print da API](images/1-API.png)
 
 ## Como obter uma autorização via Insomnia
 
 Usando o endpoint público login
 
-![2-login](C:\Users\natan\Desktop\dio\backend com python\4-fast-api\apis-assincronas\API-BANCARIA-ASSINCRONA\images\2-login.png)
+![Insomnia login](images/2-login.png)
 
 
 
 ## Exemplo de uso com autenticação
 
-![image-20260530221444701](C:\Users\natan\Desktop\dio\backend com python\4-fast-api\apis-assincronas\API-BANCARIA-ASSINCRONA\images\3-create_account.png)
+![Insomnia create account](images/3-create_account.png)
 
 # Melhorias possíveis:
 
