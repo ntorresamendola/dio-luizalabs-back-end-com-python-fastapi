@@ -28,7 +28,7 @@ Foram atendidos os seguintes requisitos técnicos:
 
 O projeto e suas dependências foram criados usando o Poetry, mais adequado para gerenciar projetos comerciais. Requer python 3.12+.
 
-Os pacotes requeridos para o funcionamento deste projetos estão no arquivo requeriments.txt ou podem ser obtidos pelo comando(recomendado):
+Os pacotes requeridos para o funcionamento deste projeto estão no arquivo requeriments.txt ou podem ser obtidos pelo comando(recomendado):
 
 ````powershell
 poetry show
